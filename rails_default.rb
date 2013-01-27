@@ -1,4 +1,3 @@
-gem 'pg'
 gem 'r_decorator'
 gem 'jquery-rails'
 gem 'settingslogic'
@@ -43,7 +42,7 @@ CODE
 
 TEMPLATE_REPO_PATH = 'https://raw.github.com/takuya327/rails_templates/master'
 def template_to_local( path )
-  run "wget -o #{path} #{TEMPLATE_REPO_PATH}/#{path}"
+  run "wget -O #{path} #{TEMPLATE_REPO_PATH}/#{path}"
 end
 
 template_to_local 'app/decorators/application_decorator.rb'
