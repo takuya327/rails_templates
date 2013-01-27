@@ -47,8 +47,9 @@ end
 
 template_to_local 'app/decorators/application_decorator.rb'
 template_to_local 'config/initializers/original_customize.rb'
+template_to_local 'config/settings.yml'
 template_to_local 'Guardfile'
-run 'wget -o config/locales/ja.yml https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml'
+run 'wget -O config/locales/ja.yml https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml'
 
 file 'config/database.yml', <<-CODE
 development:
