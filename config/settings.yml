@@ -1,0 +1,41 @@
+defaults: &defaults
+  service: &default_service
+    protocol: http://
+    host: localhost
+  app: &default_app
+    protocol: http://
+    host: localhost
+  
+production:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+development:
+  <<: *defaults
+  service:
+    <<: *default_service
+    port: 3000
+  app:
+    <<: *default_app
+    port: 3000
+
+test:
+  <<: *defaults
+  service:
+    <<: *default_service
+    port: 39116
+  app:
+    <<: *default_app
+    port: 39116
+
+jenkins:
+  <<: *defaults
+  service:
+    <<: *default_service
+    port: 39118
+  app:
+    <<: *default_app
+    port: 39118
+    
