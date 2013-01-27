@@ -41,7 +41,15 @@ class Setting < Settingslogic
 end
 CODE
 
-run 'wget -o app/decorators/application_decorator.rb https://raw.github.com/takuya327/rails_templates/master/app/decorators/application_decorator.rb'
+TEMPLATE_REPO_PATH = 'https://raw.github.com/takuya327/rails_templates/master'
+def template_to_local( path )
+  run "wget -o #{path} #{TEMPLATE_REPO_PATH}/#{path}"
+end
+
+template_to_local 'app/decorators/application_decorator.rb'
+template_to_local 'config/initializers/original_customize.rb'
+template_to_local 'Guardfile'
+run 'wget -o config/locales/ja.yml https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml'
 
 file 'config/database.yml', <<-CODE
 development:
@@ -77,7 +85,13 @@ production:
   password: #{app_name}
 CODE
 
-run 'wget -o ./config/locales/ja.yml https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml'
+run "rvm gemset create #{app_name}"
+file ".rvmrc", "rvm use 1.9.3@#{app_name}"
+run "rvm rvmrc trust ."
+
+run 'bundle install'
+rake 'rspec:install'
+
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
