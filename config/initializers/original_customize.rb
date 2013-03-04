@@ -27,11 +27,13 @@ module ActionDispatch::Routing::UrlFor
         :port => Setting.service['port']
       }.merge(options))
     when String
+      path, query = options.split('?')
       URI::Generic.build(
         :scheme => Setting.service.protocol.sub("://",""),
         :host => Setting.service.host,
         :port => Setting.service['port'],
-        :path => options
+        :path => path,
+        :query => query
       ).to_s
     else
       URI::Generic.build(

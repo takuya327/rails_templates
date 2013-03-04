@@ -90,8 +90,4 @@ file ".rvmrc", "rvm use 1.9.3@#{app_name}"
 run "rvm rvmrc trust ."
 
 run 'bundle install'
-rake 'rspec:install'
-
-git :init
-git add: "."
-git commit: %Q{ -m 'Initial commit' }
+generate 'rspec:install'
